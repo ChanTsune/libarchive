@@ -76,8 +76,8 @@ run_tar(const char *target, const char *pack_options,
 	assertMakeDir(target, 0775);
 
 	/* Use the tar program to create an archive. */
-	r = systemf("%s cf - %s %s >%s/archive 2>%s/pack.err", testprog, pack_options, flist, target, target);
-	failure("Error invoking %s cf -%s", testprog, pack_options);
+	r = systemf("%s -c -f - %s %s >%s/archive 2>%s/pack.err", testprog, pack_options, flist, target, target);
+	failure("Error invoking %s -c -f - %s", testprog, pack_options);
 	assertEqualInt(r, 0);
 
 	assertChdir(target);
@@ -88,9 +88,9 @@ run_tar(const char *target, const char *pack_options,
 	/*
 	 * Use tar to unpack the archive into another directory.
 	 */
-	r = systemf("%s xf archive %s >unpack.out 2>unpack.err",
+	r = systemf("%s -x -f archive %s >unpack.out 2>unpack.err",
 	    testprog, unpack_options);
-	failure("Error invoking %s xf archive %s", testprog, unpack_options);
+	failure("Error invoking %s -x -f archive %s", testprog, unpack_options);
 	assertEqualInt(r, 0);
 
 	/* Verify that nothing went to stderr. */

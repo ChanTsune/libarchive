@@ -15,18 +15,18 @@ DEFINE_TEST(test_option_gid_gname)
 	assertMakeFile("file", 0644, "1234567890");
 
 	/* Create archive with no special options. */
-	failure("Error invoking %s c", testprog);
+	failure("Error invoking %s -c", testprog);
 	assertEqualInt(0,
-	    systemf("%s cf archive1 --format=ustar file >stdout1.txt 2>stderr1.txt",
+	    systemf("%s -c -f archive1 --format=ustar file >stdout1.txt 2>stderr1.txt",
 		testprog));
 	assertEmptyFile("stdout1.txt");
 	assertEmptyFile("stderr1.txt");
 	reference = slurpfile(&s, "archive1");
 
 	/* Again with both --gid and --gname */
-	failure("Error invoking %s c", testprog);
+	failure("Error invoking %s -c", testprog);
 	assertEqualInt(0,
-	    systemf("%s cf archive2 --gid=17 --gname=foofoofoo --format=ustar file >stdout2.txt 2>stderr2.txt",
+	    systemf("%s -c -f archive2 --gid=17 --gname=foofoofoo --format=ustar file >stdout2.txt 2>stderr2.txt",
 		testprog));
 	assertEmptyFile("stdout2.txt");
 	assertEmptyFile("stderr2.txt");
@@ -37,9 +37,9 @@ DEFINE_TEST(test_option_gid_gname)
 	free(data);
 
 	/* Again with just --gname */
-	failure("Error invoking %s c", testprog);
+	failure("Error invoking %s -c", testprog);
 	assertEqualInt(0,
-	    systemf("%s cf archive4 --gname=foofoofoo --format=ustar file >stdout4.txt 2>stderr4.txt",
+	    systemf("%s -c -f archive4 --gname=foofoofoo --format=ustar file >stdout4.txt 2>stderr4.txt",
 		testprog));
 	assertEmptyFile("stdout4.txt");
 	assertEmptyFile("stderr4.txt");
@@ -51,9 +51,9 @@ DEFINE_TEST(test_option_gid_gname)
 	free(reference);
 
 	/* Again with --gid  and force gname to empty. */
-	failure("Error invoking %s c", testprog);
+	failure("Error invoking %s -c", testprog);
 	assertEqualInt(0,
-	    systemf("%s cf archive3 --gid=17 --gname= --format=ustar file >stdout3.txt 2>stderr3.txt",
+	    systemf("%s -c -f archive3 --gid=17 --gname= --format=ustar file >stdout3.txt 2>stderr3.txt",
 		testprog));
 	assertEmptyFile("stdout3.txt");
 	assertEmptyFile("stderr3.txt");

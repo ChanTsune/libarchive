@@ -49,14 +49,14 @@ DEFINE_TEST(test_list_item)
 
 	/* Run 'tf' and check output. */
 	assertEqualInt(0,
-	    systemf("%s tf test_list_item.tar >tf.out 2>tf.err", testprog));
+	    systemf("%s -t -f test_list_item.tar >tf.out 2>tf.err", testprog));
 	failure("'t' mode should write results to stdout");
 	assertTextFileContents(tf_out, "tf.out");
 	assertEmptyFile("tf.err");
 
 	/* Run 'tvf' and check output. */
 	assertEqualInt(0,
-	    systemf("%s tvf test_list_item.tar >tvf.out 2>tvf.err", testprog));
+	    systemf("%s -t -v -f test_list_item.tar >tvf.out 2>tvf.err", testprog));
 	failure("'t' mode with 'v' should write more results to stdout");
 	assertTextFileContents(tvf_out, "tvf.out");
 	assertEmptyFile("tvf.err");

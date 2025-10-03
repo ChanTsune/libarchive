@@ -43,7 +43,7 @@ DEFINE_TEST(test_option_older_than)
 	/* Extract test1.tar to a clean dir and verify what got archived. */
 	assertMakeDir("test1out", 0755);
 	assertChdir("test1out");
-	assertEqualInt(0, systemf("%s xf ../test1.tar", testprog));
+	assertEqualInt(0, systemf("%s -x -f ../test1.tar", testprog));
 	assertFileNotExists("new.txt");
 	assertFileNotExists("a/b/new.txt");
 	assertFileNotExists("middle.txt");
@@ -55,7 +55,7 @@ DEFINE_TEST(test_option_older_than)
 	assertMakeDir("test2out", 0755);
 	assertChdir("test2out");
 	assertEqualInt(0,
-		systemf("%s xf ../test2.tar --older-than ../test1in/middle.txt",
+		systemf("%s -x -f ../test2.tar --older-than ../test1in/middle.txt",
 			testprog));
 	assertFileNotExists("new.txt");
 	assertFileNotExists("a/b/new.txt");

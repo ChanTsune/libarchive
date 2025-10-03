@@ -281,9 +281,9 @@ copy_basic(const char *extra_args, const char *name)
 	/*
 	 * Use the tar program to create an archive.
 	 */
-	r = systemf("%s cf archive %s -C ../original f d l m s >pack.out 2>pack.err",
+	r = systemf("%s -c -f archive %s -C ../original f d l m s >pack.out 2>pack.err",
 	    testprog, extra_args);
-	failure("Error invoking \"%s cf archive %s\"", testprog, extra_args);
+	failure("Error invoking \"%s -c -f archive %s\"", testprog, extra_args);
 	assertEqualInt(r, 0);
 
 	/* Verify that nothing went to stdout or stderr. */
@@ -293,8 +293,8 @@ copy_basic(const char *extra_args, const char *name)
 	/*
 	 * Use tar to unpack the archive into another directory.
 	 */
-	r = systemf("%s xf archive >unpack.out 2>unpack.err", testprog);
-	failure("Error invoking %s xf archive", testprog);
+	r = systemf("%s -x -f archive >unpack.out 2>unpack.err", testprog);
+	failure("Error invoking %s -x -f archive", testprog);
 	assertEqualInt(r, 0);
 
 	/* Verify that nothing went to stdout or stderr. */
@@ -323,9 +323,9 @@ copy_ustar(void)
 	/*
 	 * Use the tar program to create an archive.
 	 */
-	r = systemf("%s cf archive --format=ustar -C ../original f d l m s >pack.out 2>pack.err",
+	r = systemf("%s -c -f archive --format=ustar -C ../original f d l m s >pack.out 2>pack.err",
 	    testprog);
-	failure("Error invoking \"%s cf archive --format=ustar\"", testprog);
+	failure("Error invoking \"%s -c -f archive --format=ustar\"", testprog);
 	assertEqualInt(r, 0);
 
 	/* Verify that nothing went to stdout. */
@@ -336,8 +336,8 @@ copy_ustar(void)
 	/*
 	 * Use tar to unpack the archive into another directory.
 	 */
-	r = systemf("%s xf archive >unpack.out 2>unpack.err", testprog);
-	failure("Error invoking %s xf archive", testprog);
+	r = systemf("%s -x -f archive >unpack.out 2>unpack.err", testprog);
+	failure("Error invoking %s -x -f archive", testprog);
 	assertEqualInt(r, 0);
 
 	/* Verify that nothing went to stdout or stderr. */

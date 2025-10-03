@@ -45,7 +45,7 @@ DEFINE_TEST(test_option_mtime)
 
 	assertMakeDir("out.noclamp", 0755);
 	assertChdir("out.noclamp");
-	assertEqualInt(0, systemf("%s xf ../noclamp.tar", testprog));
+	assertEqualInt(0, systemf("%s -x -f ../noclamp.tar", testprog));
 	assertFileMtime("new_mtime", 86400, 0);
 	assertFileMtime("mid_mtime", 86400, 0);
 	assertFileMtime("old_mtime", 86400, 0);
@@ -61,7 +61,7 @@ DEFINE_TEST(test_option_mtime)
 
 	assertMakeDir("out.clamp", 0755);
 	assertChdir("out.clamp");
-	assertEqualInt(0, systemf("%s xf ../clamp.tar", testprog));
+	assertEqualInt(0, systemf("%s -x -f ../clamp.tar", testprog));
 	assertFileMtime("new_mtime", 86400, 0);
 	assertFileMtime("mid_mtime", 10000, 0);
 	assertFileMtime("old_mtime", 1, 0);
@@ -74,7 +74,7 @@ DEFINE_TEST(test_option_mtime)
 			testprog));
 	assertMakeDir("out.archive2archive", 0755);
 	assertChdir("out.archive2archive");
-	assertEqualInt(0, systemf("%s xf ../archive2archive.tar", testprog));
+	assertEqualInt(0, systemf("%s -x -f ../archive2archive.tar", testprog));
 	assertFileMtime("new_mtime", 0, 0);
 	assertFileMtime("mid_mtime", 0, 0);
 	assertFileMtime("old_mtime", 0, 0);

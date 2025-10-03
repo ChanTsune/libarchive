@@ -23,8 +23,8 @@ DEFINE_TEST(test_option_r)
 
 	/* Create an archive with one file. */
 	assertMakeFile("f1", 0644, "abc");
-	r = systemf("%s cf archive.tar --format=ustar f1 >step1.out 2>step1.err", testprog);
-	failure("Error invoking %s cf archive.tar f1", testprog);
+	r = systemf("%s -c -f archive.tar --format=ustar f1 >step1.out 2>step1.err", testprog);
+	failure("Error invoking %s -c -f archive.tar f1", testprog);
 	assertEqualInt(r, 0);
 	assertEmptyFile("step1.out");
 	assertEmptyFile("step1.err");
@@ -50,8 +50,8 @@ DEFINE_TEST(test_option_r)
 		buff[i] = "abcdefghijklmnopqrstuvwxyz"[rand() % 26];
 	buff[buff_size - 1] = '\0';
 	assertMakeFile("f1", 0644, buff);
-	r = systemf("%s rf archive.tar --format=ustar f1 >step2.out 2>step2.err", testprog);
-	failure("Error invoking %s rf archive.tar f1", testprog);
+	r = systemf("%s -r -f archive.tar --format=ustar f1 >step2.out 2>step2.err", testprog);
+	failure("Error invoking %s -r -f archive.tar f1", testprog);
 	assertEqualInt(r, 0);
 	assertEmptyFile("step2.out");
 	assertEmptyFile("step2.err");
@@ -76,8 +76,8 @@ DEFINE_TEST(test_option_r)
 
 	/* Update the archive by adding a different file. */
 	assertMakeFile("f2", 0644, "f2");
-	r = systemf("%s rf archive.tar --format=ustar f2 >step3.out 2>step3.err", testprog);
-	failure("Error invoking %s rf archive.tar f2", testprog);
+	r = systemf("%s -r -f archive.tar --format=ustar f2 >step3.out 2>step3.err", testprog);
+	failure("Error invoking %s -r -f archive.tar f2", testprog);
 	assertEqualInt(r, 0);
 	assertEmptyFile("step3.out");
 	assertEmptyFile("step3.err");
@@ -100,8 +100,8 @@ DEFINE_TEST(test_option_r)
 	/* Unpack everything */
 	assertMakeDir("extract", 0775);
 	assertChdir("extract");
-	r = systemf("%s xf ../archive.tar >extract.out 2>extract.err", testprog);
-	failure("Error invoking %s xf archive.tar", testprog);
+	r = systemf("%s -x -f ../archive.tar >extract.out 2>extract.err", testprog);
+	failure("Error invoking %s -x -f archive.tar", testprog);
 	assertEqualInt(r, 0);
 	assertEmptyFile("extract.out");
 	assertEmptyFile("extract.err");

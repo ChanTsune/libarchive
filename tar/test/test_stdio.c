@@ -58,13 +58,13 @@ DEFINE_TEST(test_stdio)
 	 */
 
 	/* 'cf' should generate no output unless there's an error. */
-	r = systemf("%s cf archive f l >cf.out 2>cf.err", testprog);
+	r = systemf("%s -c -f archive f l >cf.out 2>cf.err", testprog);
 	assertEqualInt(r, 0);
 	assertEmptyFile("cf.out");
 	assertEmptyFile("cf.err");
 
 	/* 'cvf' should generate file list on stderr, empty stdout. */
-	r = systemf("%s cvf archive f l >cvf.out 2>cvf.err", testprog);
+	r = systemf("%s -c -v -f archive f l >cvf.out 2>cvf.err", testprog);
 	assertEqualInt(r, 0);
 	failure("'cv' writes filenames to stderr, nothing to stdout (SUSv2)\n"
 	    "Note that GNU tar writes the file list to stdout by default.");
@@ -72,26 +72,26 @@ DEFINE_TEST(test_stdio)
 	assertTextFileContents(cvf_err, "cvf.err");
 
 	/* 'cvf -' should generate file list on stderr, archive on stdout. */
-	r = systemf("%s cvf - f l >cvf-.out 2>cvf-.err", testprog);
+	r = systemf("%s -c -v -f - f l >cvf-.out 2>cvf-.err", testprog);
 	assertEqualInt(r, 0);
 	failure("cvf - should write archive to stdout");
 	failure("cvf - should write file list to stderr (SUSv2)");
 	assertEqualFile("cvf.err", "cvf-.err");
 	/* Check that stdout from 'cvf -' was a valid archive. */
-	r = systemf("%s tf cvf-.out >cvf-tf.out 2>cvf-tf.err", testprog);
+	r = systemf("%s -t -f cvf-.out >cvf-tf.out 2>cvf-tf.err", testprog);
 	assertEqualInt(r, 0);
 	assertEmptyFile("cvf-tf.err");
 	assertTextFileContents(tf_out, "cvf-tf.out");
 
 	/* 'tf' should generate file list on stdout, empty stderr. */
-	r = systemf("%s tf archive >tf.out 2>tf.err", testprog);
+	r = systemf("%s -t -f archive >tf.out 2>tf.err", testprog);
 	assertEqualInt(r, 0);
 	assertEmptyFile("tf.err");
 	failure("'t' mode should write results to stdout");
 	assertTextFileContents(tf_out, "tf.out");
 
 	/* 'tvf' should generate file list on stdout, empty stderr. */
-	r = systemf("%s tvf archive >tvf.out 2>tvf.err", testprog);
+	r = systemf("%s -t -v -f archive >tvf.out 2>tvf.err", testprog);
 	assertEqualInt(r, 0);
 	assertEmptyFile("tvf.err");
 	failure("'tv' mode should write results to stdout");
@@ -101,26 +101,26 @@ DEFINE_TEST(test_stdio)
 	free(p);
 
 	/* 'tvf -' uses stdin, file list on stdout, empty stderr. */
-	r = systemf("%s tvf - < archive >tvf-.out 2>tvf-.err", testprog);
+	r = systemf("%s -t -v -f - < archive >tvf-.out 2>tvf-.err", testprog);
 	assertEqualInt(r, 0);
 	assertEmptyFile("tvf-.err");
 	failure("'tvf-' mode should write the same results as 'tvf'");
 	assertEqualFile("tvf.out", "tvf-.out");
 
 	/* Basic 'xf' should generate no output on stdout or stderr. */
-	r = systemf("%s xf archive >xf.out 2>xf.err", testprog);
+	r = systemf("%s -x -f archive >xf.out 2>xf.err", testprog);
 	assertEqualInt(r, 0);
 	assertEmptyFile("xf.err");
 	assertEmptyFile("xf.out");
 
 	/* 'xvf' should generate list on stderr, empty stdout. */
-	r = systemf("%s xvf archive >xvf.out 2>xvf.err", testprog);
+	r = systemf("%s -x -v -f archive >xvf.out 2>xvf.err", testprog);
 	assertEqualInt(r, 0);
 	assertEmptyFile("xvf.out");
 	assertTextFileContents(xvf_err, "xvf.err");
 
 	/* 'xvOf' should generate list on stderr, file contents on stdout. */
-	r = systemf("%s xvOf archive >xvOf.out 2>xvOf.err", testprog);
+	r = systemf("%s -x -v -O -f archive >xvOf.out 2>xvOf.err", testprog);
 	assertEqualInt(r, 0);
 	/* Verify xvOf.out is the file contents */
 	p = slurpfile(&s, "xvOf.out");
@@ -130,7 +130,7 @@ DEFINE_TEST(test_stdio)
 	free(p);
 
 	/* 'xvf -' should generate list on stderr, empty stdout. */
-	r = systemf("%s xvf - < archive >xvf-.out 2>xvf-.err", testprog);
+	r = systemf("%s -x -v -f - < archive >xvf-.out 2>xvf-.err", testprog);
 	assertEqualInt(r, 0);
 	assertEmptyFile("xvf-.out");
 	assertEqualFile("xvf.err", "xvf-.err");
