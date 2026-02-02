@@ -1,0 +1,3 @@
+#!/usr/bin/env zsh
+
+pna --quiet experimental stdio --unstable --keep-dir --keep-timestamp --allow-unsafe-links $@
