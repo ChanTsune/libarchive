@@ -197,6 +197,7 @@ libarchive_la_SOURCES= \
 	libarchive/archive_read_support_format_iso9660.c \
 	libarchive/archive_read_support_format_lha.c \
 	libarchive/archive_read_support_format_mtree.c \
+	libarchive/archive_read_support_format_pna.c \
 	libarchive/archive_read_support_format_rar.c \
 	libarchive/archive_read_support_format_rar5.c \
 	libarchive/archive_read_support_format_raw.c \
@@ -245,6 +246,7 @@ libarchive_la_SOURCES= \
 	libarchive/archive_write_set_format_iso9660.c \
 	libarchive/archive_write_set_format_mtree.c \
 	libarchive/archive_write_set_format_pax.c \
+	libarchive/archive_write_set_format_pna.c \
 	libarchive/archive_write_set_format_raw.c \
 	libarchive/archive_write_set_format_shar.c \
 	libarchive/archive_write_set_format_ustar.c \
@@ -520,6 +522,7 @@ libarchive_test_SOURCES= \
 	libarchive/test/test_read_format_mtree.c \
 	libarchive/test/test_read_format_mtree_crash747.c \
 	libarchive/test/test_read_format_pax_bz2.c \
+	libarchive/test/test_read_format_pna.c \
 	libarchive/test/test_read_format_rar.c \
 	libarchive/test/test_read_format_rar_encryption.c \
 	libarchive/test/test_read_format_rar_encryption_data.c \
@@ -646,6 +649,7 @@ libarchive_test_SOURCES= \
 	libarchive/test/test_write_format_mtree_preset_digests.c \
 	libarchive/test/test_write_format_mtree_quoted_filename.c\
 	libarchive/test/test_write_format_pax.c \
+	libarchive/test/test_write_format_pna.c \
 	libarchive/test/test_write_format_raw.c \
 	libarchive/test/test_write_format_raw_b64.c \
 	libarchive/test/test_write_format_shar_empty.c \
@@ -1003,6 +1007,18 @@ libarchive_test_EXTRA_DIST=\
 	libarchive/test/test_read_format_ustar_filename_koi8r.tar.Z.uu \
 	libarchive/test/test_read_format_warc.warc.uu \
 	libarchive/test/test_read_format_warc_incomplete.warc.uu \
+	libarchive/test/test_read_format_pna.pna.uu \
+	libarchive/test/test_read_format_pna_crc.pna.uu \
+	libarchive/test/test_read_format_pna_deflate.pna.uu \
+	libarchive/test/test_read_format_pna_encrypted.pna.uu \
+	libarchive/test/test_read_format_pna_meta.pna.uu \
+	libarchive/test/test_read_format_pna_solid.pna.uu \
+	libarchive/test/test_read_format_pna_split.part1.pna.uu \
+	libarchive/test/test_read_format_pna_split.part2.pna.uu \
+	libarchive/test/test_read_format_pna_split.part3.pna.uu \
+	libarchive/test/test_read_format_pna_split_concat.pna.uu \
+	libarchive/test/test_read_format_pna_xz.pna.uu \
+	libarchive/test/test_read_format_pna_zstd.pna.uu \
 	libarchive/test/test_read_format_xar_doublelink.xar.uu \
 	libarchive/test/test_read_format_xar_duplicate_filename_node.xar.uu \
 	libarchive/test/test_read_format_zip.zip.uu \

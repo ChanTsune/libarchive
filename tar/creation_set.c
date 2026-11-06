@@ -78,6 +78,7 @@ get_format_code(const char *suffix)
 		{ ".cpio",	"cpio" },
 		{ ".iso",	"iso9660" },
 		{ ".mtree",	"mtree" },
+		{ ".pna",	"pna" },
 		{ ".shar",	"shar" },
 		{ ".tar",	"paxr" },
 		{ ".warc",	"warc" },

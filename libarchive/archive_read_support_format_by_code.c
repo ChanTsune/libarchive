@@ -65,6 +65,8 @@ archive_read_support_format_by_code(struct archive *a, int format_code)
 		return archive_read_support_format_tar(a);
 	case ARCHIVE_FORMAT_WARC:
 		return archive_read_support_format_warc(a);
+	case ARCHIVE_FORMAT_PNA:
+		return archive_read_support_format_pna(a);
 	case ARCHIVE_FORMAT_XAR:
 		return archive_read_support_format_xar(a);
 	case ARCHIVE_FORMAT_ZIP:

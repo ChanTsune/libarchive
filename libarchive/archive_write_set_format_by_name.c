@@ -60,6 +60,7 @@ struct { const char *name; int (*setter)(struct archive *); } names[] =
 	{ "newc",	archive_write_set_format_cpio_newc },
 	{ "odc",	archive_write_set_format_cpio_odc },
 	{ "oldtar",	archive_write_set_format_v7tar },
+	{ "pna",	archive_write_set_format_pna },
 	{ "pax",	archive_write_set_format_pax },
 	{ "paxr",	archive_write_set_format_pax_restricted },
 	{ "posix",	archive_write_set_format_pax },
